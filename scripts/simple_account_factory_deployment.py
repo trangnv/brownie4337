@@ -1,4 +1,4 @@
-from brownie import accounts, EntryPoint, SimpleAccountFactory
+from brownie import accounts, EntryPoint, SimpleAccountFactory, config, network
 from scripts.utils import get_account
 
 entry_point_contract_address = "0x0576a174D229E3cFA37253523E645A78A0C91B57"
@@ -12,7 +12,9 @@ def deploy_simple_account_factory_contract():
     print("Deploying SimpleAccount contract...")
     dev = get_account(0)
     simple_account_factory_contract = SimpleAccountFactory.deploy(
-        entry_point_contract_address, {"from": dev}, publish_source=True
+        entry_point_contract_address,
+        {"from": dev},
+        publish_source=config["networks"][network.show_active()].get("verify"),
     )
     # dev1 = get_account(1)
     print(

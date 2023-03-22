@@ -11,6 +11,8 @@ compiler:
       runs: 20000
 networks:
   default: goerli-fork
+  goerli-fork:
+    verify: False
   goerli:
     verify: True
 dotenv: .env
